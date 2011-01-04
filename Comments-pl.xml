@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Medeos xmlns="http://www.medeos.org/v1.0">
+	<ConsultantComments created="czas utworzenia dokumentu">
+		<Author>
+			<UnitName>
+				Nazwa jednostki wysyłającej komunikat. 
+				Najlepiej CN z cetryfikatu lub jego fragment
+			</UnitName>
+			<Person>
+				<!-- 
+				Docelowo dane o wysyłającym mają być 
+				weryfikowane względem podpisiu elektronicznego 
+				-->
+				<Name>
+					<!-- Pełna nazwa osoby zlecającej -->
+					Jan Kowalski
+				</Name>
+				<Licence>
+					<!-- Opcjonalny numer licencji 
+							lekarza zlecającego-->
+					LIC 1234567
+				</Licence>
+				<EMail>konsultant@exampl.ecom</EMail>
+				<Phone>+48911234567</Phone>
+			</Person>
+			<AdditionalContactInfo>
+				<!-- 
+				Opcjonalne dodatkowe informacje o możliwości kontaktu.
+				Np. jakie inne osoby mogą być pomocne w razie niemożliwości
+				kontaktu ze zlecającym, lub godziny w których można
+				telefonować.				 
+				-->
+				Tekst z uwagami na temat możliwości kontaktu ze zleceniodawcą.  
+			</AdditionalContactInfo>
+		</Author>
+		<Type>
+			reject|update
+		</Type>
+		<Summary xml:lang="pl-PL">
+			Krótkie podsumowanie.
+			<Translation xml:lang="de-DE">deutsche Übersetzung</Translation>
+			<Translation xml:lang="en-US">English translation</Translation>
+		</Summary>
+		<Body xml:lang="pl-PL">
+			Treść komentarza.
+			<Translation xml:lang="de-DE">deutsche Übersetzung</Translation>
+			<Translation xml:lang="en-US">English translation</Translation>
+		</Body>
+	</ConsultantComments>
+</Medeos>

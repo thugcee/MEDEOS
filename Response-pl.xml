@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Medeos xmlns="http://www.medeos.org/v1.0.0">
+	<Interpretation created="czas utworzenia dokumentu">
+		<Author>
+			<UnitName>
+				Nazwa jednostki wysyłającej komunikat. 
+				Najlepiej CN z cetryfikatu lub jego fragment
+			</UnitName>
+			<Person><!-- Docelowo dane o wysyłającym mają być 
+						weryfikowane względem podpisiu elektronicznego -->
+				<Name>Nazwa osoby wysyłającej komunikat.</Name>
+				<Licence>Opcjonalny numer prawa wykonywania zawodu
+						lekarza zlecającego.
+				</Licence>
+			</Person>
+		</Author>
+		<Summary>
+			Krótkie podsumowanie.
+		</Summary>
+		<Body>
+			Treść opisu badania.
+		</Body>
+		<InResponseTo><!-- potrzebne dla powiązania danych przy podpisie elektronicznym -->
+			<Order sha256="befdf0df30cd0943c828a3b54d058067a20931a9cc0f409b3dc8aa56d342179e"/>
+		</InResponseTo>
+		<Attachments><!-- lista załączników do opisu badania wraz z sumami kontrolnymi 
+						(potrzebna dla powiązania danych przy podpisie elektronicznym) -->
+			<File name="image3.dicom" sha256="23b43d25b091661924566w3f2e53c7b8a23540ae289d052f955521a9c218869b"/> 
+			<File name="image4.dicom" sha256="6433b480c5f5465565e4169afd933f6b296578ec77d53025b4720a59f439d1c4"/>
+			... 
+		</Attachments>
+	</Interpretation>
+</Medeos>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Medeos xmlns="http://www.medeos.org/v1.0">
+	<Order created="czas utworzenia dokumentu przez klienta">
+		<Sender>
+			<UnitName>
+				Nazwa jednostki wysyłającej komunikat. 
+				Najlepiej CN z cetryfikatu lub jego fragment
+			</UnitName>
+			<StationName>
+				Nazwa stacji wysyłającej komunikat.
+				Najlepiej CN z cetryfikatu lub jego fragment
+			</StationName>
+			<Person><!-- Dane o wysyłającym powinny być 
+						weryfikowane względem podpisiu elektronicznego -->
+				<Name>Nazwa osoby wysyłającej komunikat.</Name>
+				<Licence>Opcjonalny numer prawa wykonywania zawodu
+							lekarza zlecającego.
+				</Licence>
+				<EMail>Adres e-mail do powiadomień.</EMail>
+				<Phone>Telefon kontaktowy.</Phone>
+			</Person>
+			<AdditionalContactInfo> <!-- opcjonalne -->
+				Tekst z uwagami na temat możliwości kontaktu ze zleceniodawcą.  
+			</AdditionalContactInfo>
+		</Sender>
+		<Receiver>
+			<UnitName>
+				Nazwa jednostki, która ma sie zająć 
+				realizacją zlecenia.
+			</UnitName>
+			<PersonName>
+				Opcjonalna nazwa osoby, która ma się 
+				zająć realizacją zlecenia.
+			</PersonName>
+		</Receiver>
+		<Patient id="unikalny identyfikator pacjenta nadawany przez klienta
+						(np. pesel)">
+			<Name>Nazwa pacjenta lub "Pacjent Anonimowy".</Name>
+			<Gender>Płeć pacjenta: male|female|unidentified</Gender>
+			<DateOfBirth>
+		    	<Month>1</Month><!-- Opcjonalne -->
+      			<Day>15</Day><!-- Opcjonalne -->
+      			<Year>2001</Year>
+			</DateOfBirth>
+			<Address><!-- Opcjonalne -->
+		        <Street1></Street1>
+        		<Street2></Street2>
+		        <City></City>
+        		<Zip></Zip>
+        		<Region></Region>
+        		<Country></Country>
+			</Address>
+		</Patient>
+		<RequestedService id="id ze słownika usług">
+			<Priority value="wartość 0-2; 0 - niski, 1 - normalny, 2 - pilny"/>
+			<!-- Priority wpływa między innymi na kolejkowanie wysyłanych zleceń  
+			po stronie klienta -->
+			<Description xml:lang="pl-PL">
+				Rozpoznanie
+				<Translation xml:lang="de-DE">deutsche Übersetzung</Translation>
+				<Translation xml:lang="en-US">English translation</Translation>
+			</Description>
+			<Problem xml:lang="pl-PL">
+				Co badanie ma wyjaśnić
+				<Translation xml:lang="de-DE">deutsche Übersetzung</Translation>
+				<Translation xml:lang="en-US">English translation</Translation>
+			</Problem>
+			<Comment xml:lang="pl-PL">
+				Dodatkowy komentarz
+				<Translation xml:lang="de-DE">deutsche Übersetzung</Translation>
+				<Translation xml:lang="en-US">English translation</Translation>
+			</Comment>
+		</RequestedService>
+	</Order>
+</Medeos>

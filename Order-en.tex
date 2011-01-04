@@ -1,0 +1,54 @@
+\noindent
+\ttfamily
+\hlstd{}\hlkwa{$<$?xml\ }\hlstd{}\hlkwb{version}\hlstd{=}\hlstr{"1.0"}\hlstd{\ }\hlkwb{encoding}\hlstd{=}\hlstr{"UTF{-}8"}\hlstd{}\hlkwa{?$>$}\hspace*{\fill}\\
+\hlstd{}\hlkwa{$<$Szob\ }\hlstd{}\hlkwb{xmlns}\hlstd{=}\hlstr{"http://www.szob.org/v1.0.0"}\hlstd{}\hlkwa{$>$}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{$<$Order\ }\hlstd{}\hlkwb{created}\hlstd{=}\hlstr{"optional\ document\ creation\ time"}\hlstd{}\hlkwa{$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$Sender$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$UnitName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{The\ name\ of\ medical\ unit\ sending\ the\ order.\ It\ is\ recommended\ to\ use\ Common\ Name\ from\ certificate\hspace*{\fill}\\
+}\hlstd{\ \ \ \ }\hlstd{used\ by\ a\ client\ to\ make\ HTTPS\ connection.\ Potentially\ this\ field\ can\ be\ compared\ by\ a\ server\hspace*{\fill}\\
+}\hlstd{\ \ \ \ }\hlstd{with\ X}\hlnum{.509\ }\hlstd{cert's\ CN\ field\ to\ make\ a\ decision\ on\ accepting\ or\ denying\ the\ request.\hspace*{\fill}\\
+}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/UnitName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$StationName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{One\ medical\ unit\ can\ have\ many\ MEDEOS\ stations.\ This\ field\ contains\ the\ name\ of\ particular\ station.\hspace*{\fill}\\
+}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/StationName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Person$>$}\hlstd{}\hlcom{$<$!{-}{-}\ Probably\ contents\ of\ this\ tag\ should\ be\ verified\ against\ data}\hspace*{\fill}\\
+\hlcom{}\hlstd{\ \ \ \ }\hlcom{from\ certificate\ used\ to\ sign\ this\ xml\ file\ {-}{-}$>$}\hlstd{\hspace*{\fill}\\
+}\hlstd{\ \ \ \ }\hlstd{}\hlkwa{$<$Name$>$}\hlstd{Name\ of\ the\ person\ who\ sends\ the\ order.}\hlkwa{$<$/Name$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{}\hlkwa{$<$Licence$>$}\hlstd{Optional\ licence\ number.\hspace*{\fill}\\
+}\hlstd{\ \ \ \ }\hlstd{}\hlkwa{$<$/Licence$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/Person$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$/Sender$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$Receiver$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$UnitName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/UnitName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$PersonName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/PersonName$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$/Receiver$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$Patient\ }\hlstd{}\hlkwb{id}\hlstd{=}\hlstr{"optional\ national\ person\ id\ "}\hlstd{}\hlkwa{$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Name$>$$<$/Name$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Gender$>$}\hlstd{male\textbar female}\hlkwa{$<$/Gender$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$DateOfBirth$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Month$>$}\hlstd{}\hlnum{1}\hlstd{}\hlkwa{$<$/Month$>$}\hlstd{}\hlcom{$<$!{-}{-}\ Optional\ {-}{-}$>$}\hlstd{\hspace*{\fill}\\
+}\hlstd{\ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Day$>$}\hlstd{}\hlnum{15}\hlstd{}\hlkwa{$<$/Day$>$}\hlstd{}\hlcom{$<$!{-}{-}\ Optional\ {-}{-}$>$}\hlstd{\hspace*{\fill}\\
+}\hlstd{\ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Year$>$}\hlstd{}\hlnum{2001}\hlstd{}\hlkwa{$<$/Year$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/DateOfBirth$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Address$>$}\hlstd{}\hlcom{$<$!{-}{-}\ Optional\ {-}{-}$>$}\hlstd{\hspace*{\fill}\\
+}\hlstd{\ \ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Street1$>$$<$/Street1$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Street2$>$$<$/Street2$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$City$>$$<$/City$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Zip$>$$<$/Zip$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Region$>$$<$/Region$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ \ \ \ \ \ \ \ }\hlstd{}\hlkwa{$<$Country$>$$<$/Country$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$/Address$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$/Patient$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$RequestedService\ }\hlstd{}\hlkwb{id}\hlstd{=}\hlstr{"service\ id\ from\ serices\ catalog\ served\ by\ a\ server"}\hlstd{}\hlkwa{$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Priority\ }\hlstd{}\hlkwb{value}\hlstd{=}\hlstr{"0\ {-}\ normal,\ 1\ {-}\ urgent"}\hlstd{}\hlkwa{/$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Description$>$$<$/Description$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Problem$>$$<$/Problem$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ \ }\hlstd{}\hlkwa{$<$Comment$>$$<$/Comment$>$}\hspace*{\fill}\\
+\hlstd{}\hlstd{\ \ }\hlstd{}\hlkwa{$<$/RequestedService$>$}\hspace*{\fill}\\
+\hlstd{\ }\hlkwa{$<$/Order$>$}\hspace*{\fill}\\
+\hlstd{}\hlkwa{$<$/Szob$>$}\hlstd{}\hspace*{\fill}\\
+\mbox{}
+\normalfont

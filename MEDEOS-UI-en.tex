@@ -1,0 +1,179 @@
+\documentclass[a4paper]{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{mdwlist}
+\usepackage{paralist}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[bookmarks=true]{hyperref}
+\hypersetup{
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdfkeywords={keywords}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links
+    citecolor=black,        % color of links to bibliography
+    filecolor=black,      % color of file links
+    urlcolor=black           % color of external links
+}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,shadows,trees} % for pgf-umlsd
+\usepackage[underline=true,rounded corners=false]{pgf-umlsd}
+
+\lstset{ %
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=5,                   % the step between two line-numbers. 
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+%frame=single,	                % adds a frame around the code
+tabsize=2,	                % sets default tabsize to 2 spaces
+captionpos=b,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+title=\lstname,                 % show the filename of files included with \lstinputlisting; also try caption instead of title
+%escapeinside={\%*}{*)},          % if you want to add a comment within your code
+inputencoding=utf8,
+extendedchars=true
+}
+
+%highlight
+\usepackage{color}
+\usepackage{alltt}
+\usepackage{ucs}
+\input {highlight.sty}
+
+\begin{document}
+\title{Medical Expertise Ordering System - User Interface}
+\author{Seweryn Niemiec, Krzysztof Bogusławski,\\ 
+Łukasz Martyniak, Bartosz Uchacz, Przemysław Wyrobek \\ 
+\textbf{Academic Center of Computer Science } of \\ 
+Westpomeranian University of Technology in Szczecin,\\
+Fundacja IT}
+\date{\today}
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+
+Document which describes Medical Expertise Ordering System (MEDEOS, called later the
+System) does not contain specification for user interface. User interface is not integral
+part of the System and its functionality, design, method of presentation and level of
+integration with other IT systems can vary greatly by implementation and depends on
+individual users needs. To get the big picture of how the System works and provide some
+idea of user interface construction, a simple case studies has been described here.
+
+This document is a supplement to document titled ''Medical Expertise Ordering System''
+and contains references to keywords defined there.
+
+\section{An example customer -- consultant session}
+
+This description is based on concrete case with many System's variables preselected. For
+example, images created during examination are saved in PACS, but it doesn't mean that
+PACS is required by the System. To get information about what is optional/variable and
+what is required check the main document.
+
+\subsection{Customer side}
+
+\subsubsection{Sending new order}
+
+\begin{enumerate}
+  \item Radiology technician carries out an examination and DICOM image files are created
+  as a result of it. Image files containing metadata are saved in PACS. Those
+  metadata will be later used by the \emph{customer interface} to select images for a
+  given person and examination. 
+ \item The Customer (probably a physician) starts the \emph{customer interface} and from
+ main menu selects \emph{create new order} option.
+ \item Using the new order form, the customer selects images from PACS. Metadata from
+ first selected image are used to fill some form fields (like person name), so the
+ customer do not have to enter them again. Customer fills other fields in
+ order to complete the order. One of the most important fields is the one which allows
+ selection of a consultant. Customer selects a consultant from a predefined list.
+ \item When the form is complete and all attachments selected, the customer selects 
+ \emph{send order} option.
+ \item If encryption or digital signing is used and private keys are password protected 
+then input dialog should pop-up and allow customer to enter them.
+ \item Order sending should be performed by the client in the background, not
+ blocking the user interface.
+\end{enumerate}
+
+\subsubsection{Checking order state}
+
+\begin{enumerate}
+  \item From the main menu the customer selects \emph{awaiting orders} option.
+  \item The list of sent orders shows up. It is divided/sorted by 3 groups: 
+	\begin{inparaenum}[\itshape 1\upshape)]
+		\item orders sent, uncompleted, waiting for customer action (consultant submitted
+		comments to the order),
+		\item orders sent, uncompleted, waiting for consultant action
+		\item orders which sending is in progress.
+	\end{inparaenum}.
+  \item Customer selects interesting orders from the list to check its details (like
+  transfer progress, comments from consultant, files list on the server, etc.)
+\end{enumerate}
+
+\subsubsection{Modifying an order equipped with a consultant comments}
+
+\begin{enumerate}
+  \item From the main menu the customer selects \emph{awaiting orders} option.
+  \item The list of sent orders shows up. There are orders equipped with a consultant
+  comments among other uncompleted orders.
+  \item By selecting an order form the list the customer displays order's
+  details and can read consultant comments.
+  \item The customer makes changes in an order suitable to consultant's comments. He can
+  provide additional text in order body or add new image files. All changes are 
+  remembered by the customer interface.
+  \item The customer selects \emph{send changes} option, to send all changes to the
+  server. 
+  \item The order is moved to the ''sending in progress group''.
+\end{enumerate}
+
+\subsection{Consultant side}
+
+\subsubsection{Making an interpretation}
+
+Two example solutions for software at consultant side are shown below. 
+
+\begin{enumerate}
+  \item When complete order is stored on the server, its image files are automatically
+  sent directly to preconfigured diagnostic station. A consultant (a radiologist)
+  using diagnostic station makes an examination interpretation, which is then entered to
+  the System via consultant interface (potentially run on another computer).
+  \item Consultant or technician using consultant interface browses orders and
+  selects some of them for interpretation. Radiographic images contained in those orders
+  are send to manually selected diagnostic station. Further actions same as in point 1.
+\end{enumerate}
+
+Consultant interface can have direct access to files (or database) on a server or connect
+to a server via HTTP[S] and work using GET, PUT, DELETE. The second solution requires
+implementation of distinct access profiles on a server for consultant and customer
+clients.
+
+\section{Methods of integration with existing IT systems}
+
+The System itself does not (or at least does not have to) interact with existing IT
+systems, its customer and consultant interfaces' job. Here is few possible scenarios:
+\begin{description}
+  \item[no integration]\hfill\\ interface do not talk with PACS, HIS, RIS; files
+  which will be attached to an order have to be transported to a computer running
+  interface by other means,
+  \item[integration via DICOM]\hfill\\ interface has access to radiography files
+  via DICOM communication protocol,
+  \item[integration via DICOM and with HIS and RIS]\hfill\\ interface has access to
+  radiography files via DICOM communication protocol and is exchanging metadata with
+  HIS/RIS via its own, suitable for a given system mechanism; orders are
+  synchronised between the System and HIS/RIS,
+  \item[integration via DICOM and built-in into HIS or RIS]\hfill\\
+  interface is integral part of HIS/RIS and has access to radiography files via DICOM 
+  \item[built-in into PACS]\hfill\\ interface is a integral part of PACS.
+\end{description}
+
+\end{document}

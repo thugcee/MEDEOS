@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Medeos xmlns="http://www.medeos.org/v1.0.0">
+	<Log>
+		<Entry time="czas wpisu" module="nazwa komponentu dokonującego wpisu" 
+				priority="DEBUG|INFO|NOTICE|WARN|ERROR|CRITICAL">
+			<!-- jedno z dwóch poniższych -->
+			<File name="" changeType="PUT|DELETE">
+				Opis zmiany.
+			</File>
+			<Message>
+				Treść wiadomości.
+			</Message>
+		</Entry>
+		...
+	</Log>
+</Medeos>
