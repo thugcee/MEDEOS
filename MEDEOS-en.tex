@@ -748,7 +748,7 @@ should be ensured through use of encrypted tunnels or VPN.
 \label{sec:sig}
 
 It is possible that the customer and consultant decide to use a digital certificate in order 
-to confirm authorship and data integrity. Digital signatures are not necessary for operation 
+to confirm authorship and data integrity. Digital signatures are not necessary for the operation 
 of the System, and are only a protection for the communicating parties in matters of dispute. 
 The parties that do not support signatures MUST ignore files containing signatures. In order 
 to increase transparency, the signatures are realized in \emph{detached} form, i.e. are stored 
@@ -758,31 +758,108 @@ the format used to store the signature.
 
 The following types of signatures are permitted:
 \begin{description}
-\item W3C xmldsig-core 20080610 – extension .xmldsig.xml
-\item W3C XAdES 20030220 – extension .xades.xml
-\item ETSI TS 101 903 V1.3.2 – extension .etsi-ts-101-903.xml      
+\item W3C xmldsig-core 20080610 – file extension .xmldsig.xml
+\item W3C XAdES 20030220 – file extension .xades.xml
+\item ETSI TS 101 903 V1.3.2 – file extension .etsi-ts-101-903.xml      
 \end{description}
 
 It is recommended to use XAdES or ETSI TS 101 903 format.
-	The file with the signature shall contain URIs and checksums of the signed files and X509v3 certificate of the signatory (containing a public key corresponding to the private key used for signing) for verification of the signature.
-	Only the following files are signed: body.xml – order body, response.dicom – interpretation and comments.xml – comment of the consultant and attachments. Attachments does not have separate sign files, but rather are signed together with the leading file to which they refer, through the use of extra Reference elements in leading file's signature.
-	A new signature shall be prepared after every change in the signed file and it shall be put into the server. It refers also to changes in attachments. The replaced files with signatures MUST be moved to the history directory.
-	If a directory with the signed order or a directory with the signed interpretation contains unsigned files, it is accepted that verification of the signature has failed.
+
+The file with the signature shall contain URIs and checksums of the signed files and 
+X509v3 certificate of the signatory (containing a public key corresponding to the private key 
+used for signing) for verification of the signature.
+
+Only the following files are signed: body.xml – order body, response.xml – interpretation 
+and comments.xml – comment of the consultant and its attachments. Attachments do not have 
+separate sign files, but rather are signed together with the leading file to which they 
+refer, through the use of extra Reference elements in leading file's signature.
+
+A new signature shall be prepared after every change in the signed file and it shall be put 
+into the server. It refers also to changes in attachments. The replaced files with signatures 
+MUST be moved to the history directory.
+
+If a directory with the signed order or a directory with the signed interpretation contains 
+unsigned files, it is accepted that verification of the signature has failed.
+
+\subsection{Binding of files for xmldsig-core}
+
+Binding of files (attachments to a leading file) is performed through creation of many 
+Reference instances in the SignedInfo object. An URI attribute MUST contain an absolute and 
+complete URL address pointing a file to which the hash defined in DigestValue refers.
+
+\subsection{Binding of files for ETSI TS 101 903}
+
+Similarly as for \emph{xmldsig-core}.
+
+\subsection{Binding of files for XAdES}
+
+Similarly as for \emph{xmldsig-core}.
+
+\subsection{Time-stamping}
+
+The system enables time-stamping of the created files in connection with the digital signature.
+XAdES and ETSI TS 101 903 standards specify the methods of signature time-stamping and it 
+is recommended to proceed according to the rules defined in these standards. Selection of
+concrete signature format (XAdES-T, XAdES-C, XAdES-X, XAdES-BES, etc.) lies in hands of 
+cooperation network members. Support for at least XAdES-T is recommended. 
+
+If Time-Stamp Protocol (RFC 3161) is not used, a XAdES \emph{SigningTime} element 
+shall be provided by a signatore himself. The signatory 
+declares that the signature has been made no sooner than at the time specified in SignatureTime. 
+Another party (verifying time stamp) is obliged to verify the time specified in SignatureTime. 
+The verification SHOULD be performed automatically in accordance with the politics of an 
+entity using the System. In case of claims related to the time entered, another party shall 
+be immediately informed about the problem.
+
+Time-stamping is not necessary for operation of the System and is only a protection for 
+the parties communicating in matters of dispute.
+
+\subsection{Confirmation of acceptance of the order}
+
+If the client and server decide to use the digital signature, the server MUST create a 
+digital signature confirming acceptance of the order. The confirmation is performed by 
+signing a file with the signature made by the customer and storing it in the 
+confirm.<sig ext> file described in section 5.2. The signature MUST be created automatically 
+and immediately after the complete order has been received by the server. The signature 
+confirming acceptance of the order MUST contain the signature date and time.
+
+\subsection{Order history}
+
+Modified or deleted files as the elements of the order are not lost irrevocably, but MUST 
+be saved by the server to 
+\textbf{.../$<$\textit{order id}$>$/history/}. The name of 
+the saved file is created 
+by adding the date and time of modification to the original name. The time SHOULD be 
+entered in the format according to ISO format YYYY-MM-DDThh:mm:ss.sTZD.
+
 \subsection{File formats}
 \label{sec:formaty}
 
-The System interferes only with one file, i.e., ''log''. Contents of all other files
-is interpreted and processed only by the user interfaces. To make client's and consultant
-interfaces work together formats of all exchanged files MUST be predefined and known
-for booth sides.
+The System interferes only with one file, i.e., \newline
+,,/medeos/order/$<$\textit{client}$>$/$<$\textit{order id}$>$/history/log''. \newline
+Contents of all other files
+is interpreted and processed only by the user interfaces. In order to make the customer and 
+consultant interfaces cooperate, the formats of files with order, interpretation and comment 
+shall be fixed.
+
+The general settlements about XML format are as follows:
+\begin{itemize}
+	\item all files of XML format MUST feature char coding in the UTF-8 standard.
+	\item the file shall not contain UTF BOM mark.
+	\item strings of white marks following a mark closing an element and preceding a 
+		mark opening an element SHOULD be ignored.
+\end{itemize}
+
+The interface of the customer and consultant MUST support attachments of DICOM format. 
+Attachments in other formats can be sent as well. If the customer sends an attachment of the 
+format not supported by the server, the server SHOULD automatically issue a comment with the 
+information about lack of support of the file format.
 
 \subsubsection{Order body format}
 
 Structure of XML files is currently under discussion. Example \emph{order} file is below:
 
 \include{Order-en}
-
-TODO: describe structures of other files.
 
 \subsection{Order history}
 \label{sec:hist}
