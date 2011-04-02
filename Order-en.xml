@@ -17,7 +17,7 @@
 				<MiddleName></MiddleName><!-- Optional -->
 				<NamePrefix></NamePrefix><!-- Optional -->
 				<NameSuffix></NameSuffix><!-- Optional -->
-				<Licence>Licence number.</Licence><!-- Optional -->
+				<Licence>License number</Licence><!-- Optional -->
 				<Contact>Contact info (e-mail or phone number)</Contact><!-- Optional -->
 			</Person>
 		</Sender>
@@ -34,7 +34,7 @@
 				<MiddleName></MiddleName><!-- Optional -->
 				<NamePrefix></NamePrefix><!-- Optional -->
 				<NameSuffix></NameSuffix><!-- Optional -->
-				<Licence>Licence number.</Licence><!-- Optional -->
+				<Licence>License number</Licence><!-- Optional -->
 				<Contact>Contact info (e-mail or phone number)</Contact><!-- Optional -->
 			</Person>	
 		</Receiver>
