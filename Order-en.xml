@@ -46,11 +46,7 @@
 			<NameSuffix></NameSuffix><!-- Optional -->
 			<Gender>male|female|other|unknown</Gender>
 			<Age>nnnD|nnnW|nnnM|nnnY</Age><!-- Optional DICOM AS tag-->
-			<DateOfBirth>
-		    		<Month>1</Month><!-- Optional -->
-      				<Day>15</Day><!-- Optional -->
-      				<Year>2001</Year>
-			</DateOfBirth>
+			<DateOfBirth>YYYY-MM-DD</DateOfBirth><!-- Optional -->
 			<Address><!-- Optional -->
 		        	<Street1></Street1>
         			<Street2></Street2>
