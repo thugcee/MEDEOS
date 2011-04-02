@@ -17,7 +17,8 @@
 				<MiddleName></MiddleName><!-- Optional -->
 				<NamePrefix></NamePrefix><!-- Optional -->
 				<NameSuffix></NameSuffix><!-- Optional -->
-				<Licence>Optional licence number.</Licence><!-- Optional -->
+				<Licence>Licence number.</Licence><!-- Optional -->
+				<Contact>Contact info (e-mail or phone number)</Contact><!-- Optional -->
 			</Person>
 		</Sender>
 		<Receiver>
@@ -33,10 +34,11 @@
 				<MiddleName></MiddleName><!-- Optional -->
 				<NamePrefix></NamePrefix><!-- Optional -->
 				<NameSuffix></NameSuffix><!-- Optional -->
-				<Licence>Optional licence number.</Licence><!-- Optional -->
+				<Licence>Licence number.</Licence><!-- Optional -->
+				<Contact>Contact info (e-mail or phone number)</Contact><!-- Optional -->
 			</Person>	
 		</Receiver>
-		<Patient id="optional national person id ">
+		<Patient id="optional national person id " idType="pesel|other">
 			<FamilyName></FamilyName>
 			<GivenName></GivenName>
 			<MiddleName></MiddleName><!-- Optional -->
@@ -59,6 +61,7 @@
 			</Address>
 		</Patient>
 		<RequestedService id="service id from serices catalog served by a server" priority="normal|urgent">
+			<ExaminationTime></ExaminationTime><!-- Optional -->
 			<Description></Description>
 			<Problem></Problem>
 			<Comment></Comment>
