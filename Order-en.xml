@@ -12,36 +12,53 @@
 			</StationName>
 			<Person><!-- Probably contents of this tag should be verified against data 
 				from certificate used to sign this xml file -->
-				<Name>Name of the person who sends the order.</Name>
-				<Licence>Optional licence number.
-				</Licence>
+				<FamilyName></FamilyName>
+				<GivenName></GivenName>
+				<MiddleName></MiddleName><!-- Optional -->
+				<NamePrefix></NamePrefix><!-- Optional -->
+				<NameSuffix></NameSuffix><!-- Optional -->
+				<Licence>Optional licence number.</Licence><!-- Optional -->
 			</Person>
 		</Sender>
 		<Receiver>
 			<UnitName>
 			</UnitName>
-			<PersonName>
-			</PersonName>
+			<StationName>
+				One medical unit can have many MEDEOS stations. This field contains the name of particular station.
+			</StationName>
+			<Person><!-- Probably contents of this tag should be verified against data 
+				from certificate used to sign this xml file -->
+				<FamilyName></FamilyName>
+				<GivenName></GivenName>
+				<MiddleName></MiddleName><!-- Optional -->
+				<NamePrefix></NamePrefix><!-- Optional -->
+				<NameSuffix></NameSuffix><!-- Optional -->
+				<Licence>Optional licence number.</Licence><!-- Optional -->
+			</Person>	
 		</Receiver>
 		<Patient id="optional national person id ">
-			<Name></Name>
-			<Gender>male|female</Gender>
+			<FamilyName></FamilyName>
+			<GivenName></GivenName>
+			<MiddleName></MiddleName><!-- Optional -->
+			<NamePrefix></NamePrefix><!-- Optional -->
+			<NameSuffix></NameSuffix><!-- Optional -->
+			<Gender>male|female|other|unknown</Gender>
+			<PatientsAge>nnnD|nnnW|nnnM|nnnY</PatientsAge><!-- Optional DICOM AS tag-->
 			<DateOfBirth>
-		    	<Month>1</Month><!-- Optional -->
-      			<Day>15</Day><!-- Optional -->
-      			<Year>2001</Year>
+		    		<Month>1</Month><!-- Optional -->
+      				<Day>15</Day><!-- Optional -->
+      				<Year>2001</Year>
 			</DateOfBirth>
 			<Address><!-- Optional -->
-		        <Street1></Street1>
-        		<Street2></Street2>
-		        <City></City>
-        		<Zip></Zip>
-        		<Region></Region>
-        		<Country></Country>
+		        	<Street1></Street1>
+        			<Street2></Street2>
+		        	<City></City>
+        			<Zip></Zip>
+        			<Region></Region>
+        			<Country></Country>
 			</Address>
 		</Patient>
-		<RequestedService id="service id from serices catalog served by a server">
-			<Priority value="0 - normal, 1 - urgent"/>
+		<RequestedService id="service id from serices catalog served by a server" priority="normal|urgent">
 			<Description></Description>
 			<Problem></Problem>
 			<Comment></Comment>
