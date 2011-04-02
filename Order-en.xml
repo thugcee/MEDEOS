@@ -43,7 +43,7 @@
 			<NamePrefix></NamePrefix><!-- Optional -->
 			<NameSuffix></NameSuffix><!-- Optional -->
 			<Gender>male|female|other|unknown</Gender>
-			<PatientsAge>nnnD|nnnW|nnnM|nnnY</PatientsAge><!-- Optional DICOM AS tag-->
+			<Age>nnnD|nnnW|nnnM|nnnY</Age><!-- Optional DICOM AS tag-->
 			<DateOfBirth>
 		    		<Month>1</Month><!-- Optional -->
       				<Day>15</Day><!-- Optional -->
