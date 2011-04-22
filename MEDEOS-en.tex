@@ -65,11 +65,11 @@ Fundacja IT}
 \listoffigures
 \listoftables
 
-\section{Versions of the document}
+\section{Versions of The Document}
 
 This document describes version $1.0$ of the System.
 
-\subsection{Third edition}
+\subsection{Third Edition}
 \begin{description}
   \item[Date of creation] 2010-01-01
   \item[Status] working draft
@@ -95,7 +95,7 @@ This document describes version $1.0$ of the System.
 	\end{enumerate}
 \end{description}
 
-\subsection{Second edition}
+\subsection{Second Edition}
 \begin{description}
   \item[Date of creation] 2010-06-02
   \item[Status] working draft
@@ -124,11 +124,11 @@ This document describes version $1.0$ of the System.
 	\end{enumerate}
 \end{description}
 
-\subsection{First edition}
+\subsection{First Edition}
 \begin{description}
   \item[Date of creation] 2010-05-14
   \item[Status] working draft
-  \item[Zmiany] initial version
+  \item[Changes] initial version
 \end{description}
 
 \section{Introduction}
@@ -150,17 +150,17 @@ maintain,
 
 Currently, the functionality is as follows:
 \begin{itemize}
-  \item a medical unit can electronically order another unit to execute an interpretation of
-  an medical examination
-  \item the order can have digital files attached to it (usually DICOM images, but any
-  file is allowed)
-  \item an entity making the interpretation, if necessary, can make comments to the ordering
-  unit, indicating what corrections are expected
-  \item the ordering unit can correct the order and attachments
-  \item when interpretation is ready, the ordering unit can download it
-  \item the interpretation can have additional digital files attached to it  
-  \item data and communication are protected from access by unauthorized persons
-  \item the System supports digital signatures, but not enforces it
+  \item A medical unit can electronically order another unit to execute an interpretation of
+  an medical examination;
+  \item The order can have digital files attached to it (usually DICOM images, but any
+  file is allowed);
+  \item An entity making the interpretation, if necessary, can make comments to the ordering
+  unit, indicating what corrections are expected;
+  \item The ordering unit can correct the order and attachments;
+  \item When interpretation is ready, the ordering unit can download it;
+  \item The interpretation can have additional digital files attached to it;
+  \item Data and communication are protected from access by unauthorized persons;
+  \item The System supports digital signatures, but not enforces it.
 \end{itemize}
 
 This document is to be the basis for the implementation of the system, so the words MUST,
@@ -303,7 +303,7 @@ of this document is to define the directory structure of an \emph{order}.
 The System has to be secure, so that unauthorized persons have no access to the
 transfered and stored data and users could not fake it's identity. 
 
-\section{Versions of the System and compatibility}
+\section{Versions of the System and Compatibility}
 The version of the System consists of two numbers separated by dot, e.g. 1.0. The first, 
 high-order digit is changed if any change violating compatibility with a previous version 
 is implemented in the System. A change can be such modification of structure of an XML document
@@ -418,9 +418,9 @@ special privileges and can access all files.
 \textbf{Privacy} of transmission depends on the transport method. As for the methods not
 guaranteeing confidentiality, it shall be provided at a lower layer (encrypted VPN networks).
 
-\section{Mechanism of operation}
+\section{Mechanism of Operation}
 
-\subsection{Client -- server communication}
+\subsection{Client -- Server Communication}
 
 Mechanism of communication has been developed considering HTTPS as a transportation method.
 Using this method is probably the easiest way to implement rules described here.
@@ -440,17 +440,17 @@ implementation is often useful. Using HTTPS for security is described in section
 
 URL address consists of the following components:
 \begin{description}
-	\item[Protocol]	transport protocol; it SHOULD be HTTPS
-	\item[Server address]	domain name of the server
-	\item[System name]	name of the System: „medeos”
-	\item[Service name]	in the future the System can realize various functions, ordering of 
+	\item[protocol]	transport protocol; it SHOULD be HTTPS
+	\item[server address]	domain name of the server
+	\item[system name]	name of the System: „medeos”
+	\item[service name]	in the future the System can realize various functions, ordering of 
 		examinations defined in the document is identified by the word „order”
-	\item[Client name]	name of the client who created an order; the name MUST be used for 
+	\item[client name]	name of the client who created an order; the name MUST be used for 
 		authorization of the clients; SHOULD be compared with Common Name from the certificate 
 		used by the client for communication by means of HTTPS
-	\item[Year]	year of creation of an order; this component guarantees that the list of orders can be shortened if the server operates for many years
-	\item[Order ID]	identifier of an order; order ID is selected by the client
-	\item[Resource]	path indicating a specific resource as the element of an order; structure of resources is described in section 5.2
+	\item[year]	year of creation of an order; this component guarantees that the list of orders can be shortened if the server operates for many years
+	\item[order ID]	identifier of an order; order ID is selected by the client
+	\item[resource]	path indicating a specific resource as the element of an order; structure of resources is described in section 5.2
 \end{description}
 
 Example of URL:\\
@@ -512,7 +512,7 @@ All changes made by PUT and DELETE methods SHOULD be logged in
 \emph{/medeos/order/$<$\emph{client}$>$/$<$\emph{order id}$>$/history/log} file, which is
 described in section \ref{sec:model}.
 
-\subsection{Data model}
+\subsection{Data Model}
 \label{sec:model}
 \begin{figure}
 \centering
@@ -639,7 +639,7 @@ shown in bold.}
 \end{center}
 \end{table}
 
-\subsection{States machine}
+\subsection{States Machine}
 
 \begin{figure}
 \centering
@@ -685,7 +685,7 @@ an appearance (or disappearance) of files. Depending on the method of change det
 it may be necessary to provide atomicity to files adding to the order directory. The state 
 change MUST occur only after the complete file is put into the structure.
 
-\subsection{Lista usług}
+\subsection{Services Dictionary}
 
 The consultant MUST provide the list of services offered. The list of services is 
 maintained on the server in the file \textit{/medeos/order/\textbf{services.xml}}. It is an 
@@ -696,7 +696,7 @@ consultant (or the server automatically) should indicate in the comment that the
 to be corrected. In practice, the services are in accordance with the described types of 
 examinations.
 
-\subsection{Security}
+\section{Security}
 \label{sec:bezp}
 
 Security is realized on four tiers: client authentication on a server, access authorization, 
@@ -706,7 +706,7 @@ solution of a high level of security and easy for implementation.
 
 TODO: description of files signing.
 
-\subsubsection{Client authentication} 
+\subsection{Client Authentication} 
 
 The goal of client authentication is the protection of data from unauthorized access and
 unequivocal link on the recived data with the institution that sent them.
@@ -714,7 +714,7 @@ Authentication method depends on a file transportation
 protocol. It can be based on digital certificates or logins and passwords, but to easy
 integration clients nad servers SHOULD use certificates and HTTPS.
 
-\subsubsection{Authorization}
+\subsection{Authorization}
 
 The goal of authorization is protection of data from unauthorized access and protection
 of server's directory structure from corruption. If HTTP[S] is used for transport of files, 
@@ -736,7 +736,7 @@ Access rules for individual resources are as follows:
   Client and consultant interface can only read here. 
 \end{description}
 
-\subsubsection{Transmission confidentiality}
+\subsection{Transmission Confidentiality}
 
 Confidentiality of transmission SHOULD be provided by appropriate encryption algorithms. 
 It is recommended to use AES with a key of at least 128 bits. Thereby, it is recommended 
@@ -744,7 +744,7 @@ to use HTTPS with configuration of the server allowing connections only by means
 bit or better. As for the use of protocols without encryption support, confidentiality 
 should be ensured through use of encrypted tunnels or VPN.
 
-\subsection{Digital certificate}
+\subsection{Digital Signatures}
 \label{sec:sig}
 
 It is possible that the customer and consultant decide to use a digital certificate in order 
@@ -781,21 +781,21 @@ MUST be moved to the history directory.
 If a directory with the signed order or a directory with the signed interpretation contains 
 unsigned files, it is accepted that verification of the signature has failed.
 
-\subsection{Binding of files for xmldsig-core}
+\subsubsection{Binding of Files for xmldsig-core}
 
 Binding of files (attachments to a leading file) is performed through creation of many 
 Reference instances in the SignedInfo object. An URI attribute MUST contain an absolute and 
 complete URL address pointing a file to which the hash defined in DigestValue refers.
 
-\subsection{Binding of files for ETSI TS 101 903}
+\subsubsection{Binding of Files for ETSI TS 101 903}
 
 Similarly as for \emph{xmldsig-core}.
 
-\subsection{Binding of files for XAdES}
+\subsubsection{Binding of Files for XAdES}
 
 Similarly as for \emph{xmldsig-core}.
 
-\subsection{Time-stamping}
+\subsubsection{Time-stamping}
 
 The system enables time-stamping of the created files in connection with the digital signature.
 XAdES and ETSI TS 101 903 standards specify the methods of signature time-stamping and it 
@@ -814,7 +814,7 @@ be immediately informed about the problem.
 Time-stamping is not necessary for operation of the System and is only a protection for 
 the parties communicating in matters of dispute.
 
-\subsection{Confirmation of acceptance of the order}
+\subsubsection{Confirmation of Acceptance of The Order}
 
 If the client and server decide to use the digital signature, the server MUST create a 
 digital signature confirming acceptance of the order. The confirmation is performed by 
@@ -823,16 +823,16 @@ confirm.<sig ext> file described in section 5.2. The signature MUST be created a
 and immediately after the complete order has been received by the server. The signature 
 confirming acceptance of the order MUST contain the signature date and time.
 
-\subsection{Order history}
+\subsection{Order History}
 
 Modified or deleted files as the elements of the order are not lost irrevocably, but MUST 
 be saved by the server to 
 \textbf{.../$<$\textit{order id}$>$/history/}. The name of 
 the saved file is created 
-by adding the date and time of modification to the original name. The time SHOULD be 
-entered in the format according to ISO format YYYY-MM-DDThh:mm:ss.sTZD.
+by adding modification date and time to the original file name. The time SHOULD be 
+written in the format according to ISO 8601 format YYYY-MM-DDThh:mm:ss.sTZD.
 
-\subsection{File formats}
+\section{File Formats}
 \label{sec:formaty}
 
 The System interferes only with one file, i.e., \newline
@@ -844,9 +844,9 @@ shall be fixed.
 
 The general settlements about XML format are as follows:
 \begin{itemize}
-	\item all files of XML format MUST feature char coding in the UTF-8 standard.
-	\item the file shall not contain UTF BOM mark.
-	\item strings of white marks following a mark closing an element and preceding a 
+	\item All files of XML format MUST feature char coding in the UTF-8 standard;
+	\item The file shall not contain UTF BOM mark;
+	\item Strings of white marks following a mark closing an element and preceding a 
 		mark opening an element SHOULD be ignored.
 \end{itemize}
 
@@ -855,19 +855,9 @@ Attachments in other formats can be sent as well. If the customer sends an attac
 format not supported by the server, the server SHOULD automatically issue a comment with the 
 information about lack of support of the file format.
 
-\subsubsection{Order body format}
+\subsubsection{Structure of XML Documents}
 
-Structure of XML files is currently under discussion. Example \emph{order} file is below:
-
-\include{Order-en}
-
-\subsection{Order history}
-\label{sec:hist}
-
-Modified or deleted files being a part of an 
-order are not lost, server moves a deleted file to a catalogue\\
-\textbf{/medeos/order/$<$\textit{client}$>$/$<$\textit{order id}$>$/history/}.
-The name of the moved file is created by adding a date and time of modification to the
-original name. The time SHOULD be written in ISO format (YYYY-MM-DDThh:mm:ss.sTZD)
+Structure of XML files is defined in separate XML Scheme files.
 
 \end{document}
+
