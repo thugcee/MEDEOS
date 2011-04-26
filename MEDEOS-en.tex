@@ -1,5 +1,5 @@
 \documentclass[a4paper]{article}
-\usepackage{english}
+\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{mdwlist}
 \usepackage{paralist}
@@ -46,10 +46,10 @@ extendedchars=true
 }
 
 %highlight
-\usepackage{color}
-\usepackage{alltt}
-\usepackage{ucs}
-\input {highlight.sty}
+%\usepackage{color}
+%\usepackage{alltt}
+%\usepackage{ucs}
+%\input {highlight.sty}
 
 
 \begin{document}
@@ -114,7 +114,7 @@ This document describes version $1.0$ of the System.
       \item New rule: possibility of modification of the order which is in state \emph{created}
 		is forbidden.
       \item 3 types of comments has been specified.
-      \item An \empth{unspecified gender} has been added to the content of the 
+      \item An \emph{unspecified gender} has been added to the content of the 
 			order in the \emph{Gender} field
       \item The \emph{id} attribute has been added to \emph{Patient} element in the content
 			of the order. 
@@ -191,7 +191,7 @@ Other definitions:
   \emph{interpretation})
   \item[comment] comments made by the \emph{consultant} to the \emph{customer}, indicating
   problems with the commission and what corrections in the \emph{order} are expected
-  \item[client] software sending files to the \empth{server} and downloading
+  \item[client] software sending files to the \emph{server} and downloading
   results
   \item[server] software collecting \emph{orders} and providing them to the
   \emph{consultant interface} and collecting \emph{interpretations} and providing them
@@ -275,7 +275,7 @@ examinations from one medical unit to another. This is done as described below.
     download it at any time,
     \item[comment for customer] -- the \emph{comment} is created when, for some reason, the
     \emph{consultant} cannot create a \emph{interpretation};
-    \emph{comment} can inform the \empth{customer} about necessary
+    \emph{comment} can inform the \emph{customer} about necessary
     corrections in the \emph{order}; the \emph{client} can download the \emph{comment} 
     at any time,
   \end{description}
