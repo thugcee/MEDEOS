@@ -1,70 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Order created="optional document creation time" xmlns="http://www.medeos.org/v1.0.0">
+<Order created="2010-10-10T10:30:00" 
+		xmlns="http://www.medeos.org/v1.0.0"
+		xmlns:xml="http://www.w3.org/XML/1998/namespace"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.medeos.org/v1.0.0 file://medeos_v1_0.xsd">
 	<Sender>
 		<UnitName>
-			The name of medical unit sending the order. It is recommended to use Common Name from certificate
-			used by a client to make HTTPS connection. Potentially this field can be compared by a server 
-			with X.509 cert's CN field to make a decision on accepting or denying the request.
+			Example Hospital no. 1
 		</UnitName>
 		<StationName>
-			One medical unit can have many MEDEOS stations. This field contains the name of particular station.
+			Example Station no. 1
 		</StationName>
-		<Person><!-- Probably contents of this tag should be verified against data 
-			from certificate used to sign this xml file -->
-			<FamilyName></FamilyName>
-			<GivenName></GivenName>
-			<MiddleName></MiddleName><!-- Optional -->
-			<NamePrefix></NamePrefix><!-- Optional -->
-			<NameSuffix></NameSuffix><!-- Optional -->
-			<Licence>License number</Licence><!-- Optional -->
-			<Contact>Contact info (e-mail or phone number)</Contact><!-- Optional -->
+		<Person>
+			<FamilyName>Kowalski</FamilyName>
+			<GivenName>Jan</GivenName>
+			<Licence>A12-3456</Licence>
+			<Contact>jan.kowalski@example.com</Contact>
 		</Person>
 	</Sender>
 	<Receiver>
 		<UnitName>
+			Example Hospital no. 2
 		</UnitName>
 		<StationName>
-			One medical unit can have many MEDEOS stations. This field contains the name of particular station.
+			Example Station no. 1
 		</StationName>
-		<Person><!-- Probably contents of this tag should be verified against data 
-			from certificate used to sign this xml file -->
-			<FamilyName></FamilyName>
-			<GivenName></GivenName>
-			<MiddleName></MiddleName><!-- Optional -->
-			<NamePrefix></NamePrefix><!-- Optional -->
-			<NameSuffix></NameSuffix><!-- Optional -->
-			<Licence>License number</Licence><!-- Optional -->
-			<Contact>Contact info (e-mail or phone number)</Contact><!-- Optional -->
-		</Person>	
 	</Receiver>
-	<Patient id="optional national person id " idType="pesel|other">
-		<FamilyName></FamilyName>
-		<GivenName></GivenName>
-		<MiddleName></MiddleName><!-- Optional -->
-		<NamePrefix></NamePrefix><!-- Optional -->
-		<NameSuffix></NameSuffix><!-- Optional -->
-		<Gender>male|female|other|unknown</Gender>
-		<Age>nnnD|nnnW|nnnM|nnnY</Age><!-- Optional DICOM AS tag-->
-		<DateOfBirth>YYYY-MM-DD</DateOfBirth><!-- Optional -->
-		<Address><!-- Optional -->
-			<Street1></Street1>
-			<Street2></Street2>
-			<City></City>
-			<Zip></Zip>
-			<Region></Region>
-			<Country></Country>
-		</Address>
+	<Patient id="1990123456789" idType="pesel">
+		<FamilyName>Nowak</FamilyName>
+		<GivenName>Zbigniew</GivenName>
+		<MiddleName>Jan</MiddleName>
+		<Sex>male</Sex>
+		<Age>21Y</Age>
+		<DateOfBirth>1990-10-10</DateOfBirth>
 	</Patient>
-	<RequestedService id="service id from serices catalog served by a server" priority="normal|urgent">
-		<ExaminationTime></ExaminationTime><!-- Optional -->
-		<Description></Description>
-		<Problem></Problem>
-		<Comment></Comment>
+	<RequestedService id="MR" priority="normal">
+		<ExaminationTime>2010-10-10T10:00:00</ExaminationTime>
+		<Description xml:lang="en">Examination description.</Description>
+		<Description xml:lang="pl">Opis badania.</Description>
+		<Problem xml:lang="en">What should be done.</Problem>
+		<Problem xml:lang="pl">Opis problemu do opisania.</Problem>
+		<Comment xml:lang="en">Any comments</Comment>
+		<Comment xml:lang="pl">Dodatkowe komentarze</Comment>
 	</RequestedService>
-	<Attachments><!-- list of files attached to the order with its fingerprints 
-		(needed for verification of attachments) -->
+	<Attachments>
 		<File name="image1.dicom" sha256="a9b43d25b0916619259..."/> 
 		<File name="image2.dicom" sha256="9233b480c5faba2460c..."/>
-		... 
 	</Attachments>
 </Order>
