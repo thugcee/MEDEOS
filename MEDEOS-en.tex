@@ -56,7 +56,7 @@ extendedchars=true
 \title{Medical Expertise Ordering System}
 \author{Seweryn Niemiec, Krzysztof Bogusławski,\\ 
 Łukasz Martyniak, Bartosz Uchacz, Przemysław Wyrobek \\ 
-\textbf{Academic Center of Computer Science } of \\ 
+\textbf{Academic Centre of Computer Science } of \\ 
 Westpomeranian University of Technology in Szczecin,\\
 Fundacja IT}
 \date{\today}
@@ -68,6 +68,24 @@ Fundacja IT}
 \section{Versions of The Document}
 
 This document describes version $1.0$ of the System.
+
+\subsection{Forth Edition}
+\begin{description}
+  \item[Date od creation] 2011-04-27
+  \item[Status] working draft
+  \item[Changes] \hfill \\
+   	\begin{enumerate}
+  		\item Elements describing persons in body.xml had been unified. There is a
+  		base \emph{person} type and specialized subtypes for \emph{medical persons}
+  		and \emph{patients}.
+  		\item Person name has been split into 5 fields: family name, given name,
+  		middle name, name prefix, name suffix. Those fields correspond to
+  		fields of DICOM's PatientsName tag.
+  		\item Splitting person name into many fields results in requirement of
+  		additional field to store Sender's certificate's subject field. This new
+  		field has been added to the MedicalPerson type.
+	\end{enumerate}
+\end{description}
 
 \subsection{Third Edition}
 \begin{description}
@@ -85,7 +103,7 @@ This document describes version $1.0$ of the System.
 		automatically withdrawn through creation of an appropriate $comment$.
       \item A server SHOULD feature a capability of adding next CNs to the 
 		list of authorized to access to a given order
-      \item Support for DICOM attachements is now required, other formats allowed.
+      \item Support for DICOM attachments is now required, other formats allowed.
 	\end{enumerate}
   \item[List of issues] \hfill \\
 	\begin{enumerate}
@@ -107,7 +125,7 @@ This document describes version $1.0$ of the System.
 	  \item Confirmation of acceptance of the order by the consultant has been specified.
 	  \item Time-stamping has been defined.
       \item Support for \emph{pkcs\#7} has been removed.
-      \item Support fot HTTPS as the method of transport is now required.
+      \item Support for HTTPS as the method of transport is now required.
       \item Interpretation of an examination in now stored in DICOM SR.
       \item A date of realization of an examination has been added to the content of the order.
       \item Format of the resource references has been changed to URI.
@@ -297,8 +315,8 @@ not of files on a \emph{server}. It's \emph{customer and consultant interfaces'}
 to understand and maintain the order's state. Commands can be realized by any transport
 method, such as: HTTP, WebDAV, FTP, or even PenDrive or CD connected with manual file
 moving. HTTPS is recommended as it allows easy implementation of security rules and simple
-integration of custom and third party code (http servers as file servers). The main goal
-of this document is to define the directory structure of an \emph{order}.
+integration of custom and third party code (HTTP servers as file servers). The
+main goal of this document is to define the directory structure of an \emph{order}.
 
 The System has to be secure, so that unauthorized persons have no access to the
 transfered and stored data and users could not fake it's identity. 
@@ -375,7 +393,7 @@ memories (e.g. CD).
 The System is highly scalable due to elimination of sharing and synchronization between the 
 nodes belonging to the same cooperation network. The co-operation network has no central point. 
 The only required global identifiers are clients' and servers' names (ip addresses, domain names 
-or the Distinguished Name from Subject attribure of SSL Digital Certificate),
+or the Distinguished Name from Subject attribute of SSL Digital Certificate),
 which are already unique. Every client cares for its own resources and manages them independently. 
 Client can be identified on the server by its domain name or, in case of using HTTPS, by 
 Subject attribute from client's digital certificate. There is no need for maintenance of any 
@@ -566,7 +584,7 @@ the difference.
 			customer. Details in section 6.4.
 		\item[body.xml] File named ''body.xml'' contains text of the order. It is XML file 
 			described in section \ref{sec:formaty}; The appearance of ''body'' file is a 
-			signal for consultant interface that the order has been succesfully uploaded 
+			signal for consultant interface that the order has been successfully uploaded 
 			and can be executed by the a consultant.
 		\item[response/] A directory containing response of the consultant. It is created on
 			demand, when consultant saves a response.
@@ -608,8 +626,8 @@ the difference.
 			\begin{description}
   			\item[log] file named „log” contains history of the order; it is an XML file 
 			which format has been described in section \ref{sec:formaty}. Every time any 
-			change occurs in an order (a file is added, upated or deleted), a new entry with 
-			information about an event appears in the „log”. This is the only file interpreted 
+			change occurs in an order (a file is added, updated or deleted), a new entry
+			with information about an event appears in the „log”. This is the only file interpreted 
 			by the server. 
 			\end{description}
 		\end{description}
@@ -709,10 +727,10 @@ TODO: description of files signing.
 \subsection{Client Authentication} 
 
 The goal of client authentication is the protection of data from unauthorized access and
-unequivocal link on the recived data with the institution that sent them.
+unequivocal link on the received data with the institution that sent them.
 Authentication method depends on a file transportation
 protocol. It can be based on digital certificates or logins and passwords, but to easy
-integration clients nad servers SHOULD use certificates and HTTPS.
+integration clients and servers SHOULD use certificates and HTTPS.
 
 \subsection{Authorization}
 
@@ -804,7 +822,7 @@ concrete signature format (XAdES-T, XAdES-C, XAdES-X, XAdES-BES, etc.) lies in h
 cooperation network members. Support for at least XAdES-T is recommended. 
 
 If Time-Stamp Protocol (RFC 3161) is not used, a XAdES \emph{SigningTime} element 
-shall be provided by a signatore himself. The signatory 
+shall be provided by a signature himself. The signatory 
 declares that the signature has been made no sooner than at the time specified in SignatureTime. 
 Another party (verifying time stamp) is obliged to verify the time specified in SignatureTime. 
 The verification SHOULD be performed automatically in accordance with the politics of an 
@@ -855,9 +873,13 @@ Attachments in other formats can be sent as well. If the customer sends an attac
 format not supported by the server, the server SHOULD automatically issue a comment with the 
 information about lack of support of the file format.
 
-\subsubsection{Structure of XML Documents}
+\subsection{Structure of XML Documents}
 
-Structure of XML files is defined in separate XML Scheme files.
+XML documents are defined in separate files. Structure is defined using XML
+Scheme and detailed validation rules are described using Schematron language.
+XML Scheme file gives developers possibility to generate data model for
+processed XML documents and Schematron file allows formalized, detailed
+description of requirements.
 
 \end{document}
 

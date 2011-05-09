@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.medeos.org/v1.0.0" 
+	xmlns="http://www.medeos.org/v1.0.0"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+            schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+            
+	<xs:element name="Order" type="OrderT"/>
+	
+	<xs:complexType name="OrderT">
+		<xs:sequence>
+			<xs:element name="Sender" type="UnitT"/>
+			<xs:element name="Receiver" type="UnitT"/>
+			<xs:element name="Patient" type="PatientT"/>
+			<xs:element name="RequestedService" type="RequestedServiceT"/>
+			<xs:element name="Attachments" type="AttachmentsT" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="created" type="xs:dateTime" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="UnitT">
+		<xs:sequence>
+			<xs:element name="UnitName" type="xs:token"/>
+			<xs:element name="StationName" type="xs:token" minOccurs="0"/>
+			<xs:element name="Person" type="MedicalPersonT" minOccurs="0"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PersonT">
+		<xs:sequence>
+			<xs:element name="FamilyName" type="xs:Name"/>
+			<xs:element name="GivenName" type="xs:Name"/>
+			<xs:element name="MiddleName" type="xs:Name" minOccurs="0"/>
+			<xs:element name="NamePrefix" type="xs:Name" minOccurs="0"/>
+			<xs:element name="NameSuffix" type="xs:Name" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="MedicalPersonT">
+		<xs:complexContent>
+			<xs:extension base="PersonT">
+				<xs:sequence>
+					<xs:element name="Licence" type="xs:token" minOccurs="0"/>
+					<xs:element name="Contact" type="xs:token" minOccurs="0"/>
+					<xs:element name="SubjectDN" type="xs:token" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="PatientT">
+		<xs:complexContent>
+			<xs:extension base="PersonT">
+				<xs:sequence>
+					<xs:element name="Sex" type="SexT"/>
+					<xs:element name="Age" type="AgeT"/>
+					<xs:element name="DateOfBirth" type="xs:date" minOccurs="0"/>
+					<xs:element name="Address" type="AddressT" minOccurs="0"/>
+					<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="id" type="xs:token" use="optional"/>
+				<xs:attribute name="idType" type="IdTypeT"/>
+				<xs:anyAttribute namespace="##other" processContents="skip"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="AgeT">
+		<xs:restriction base="xs:token">
+			<xs:pattern value="\d{1,3}[DWMY]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="AddressT">
+		<xs:sequence>
+			<xs:element name="Street1" type="xs:token"/>
+			<xs:element name="Street2" type="xs:token"/>
+			<xs:element name="City" type="xs:token"/>
+			<xs:element name="Zip" type="xs:token"/>
+			<xs:element name="Region" type="xs:token"/>
+			<xs:element name="Country" type="xs:token"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="SexT">
+		<xs:restriction base="xs:Name">
+			<xs:enumeration value="male"/>
+			<xs:enumeration value="female"/>
+			<xs:enumeration value="other"/>
+			<xs:enumeration value="unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="RequestedServiceT">
+		<xs:sequence>
+			<xs:element name="ExaminationTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="Description" type="MultilanguageTextT" maxOccurs="unbounded"/>
+			<xs:element name="Problem" type="MultilanguageTextT" maxOccurs="unbounded"/>
+			<xs:element name="Comment" type="MultilanguageTextT" maxOccurs="unbounded"/>
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:token" use="required"/>
+		<xs:attribute name="priority" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:Name">
+					<xs:enumeration value="normal"/>
+					<xs:enumeration value="urgent"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="MultilanguageTextT">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute ref="xml:lang"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="AttachmentsT">
+		<xs:sequence>
+			<xs:element name="File" type="FileT" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FileT">
+		<xs:attribute name="name" type="xs:token" use="required"/>
+		<xs:attribute name="sha" type="xs:token" use="optional"/>
+		<xs:attribute name="sha256" type="xs:token" use="optional"/>
+	</xs:complexType>
+
+	<xs:simpleType name="IdTypeT">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="pesel"></xs:enumeration>
+			<xs:enumeration value="other"></xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
